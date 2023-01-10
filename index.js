@@ -11,20 +11,17 @@ const query = `{
       }
     }
   }`;
-  const variables = {id: 1, offset: 0};
-  
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query, variables }),
+    body: JSON.stringify({ query }),
   };
   
   fetch(API_URL, options)
     .then(response => response.json())
     .then(({ data }) => {
       const transactions = data.user[0].transactions;
-      const amounts = transactions.map(transaction => transaction.amount);
-      const createdAt = transactions.map(transaction => transaction.createdAt);
+      const dataPoints = transactions.map(transaction => [new Date(transaction.createdAt), transaction.amount]);
       Highcharts.chart('chart', {
           chart: {
               type: 'line'
@@ -33,7 +30,14 @@ const query = `{
               text: 'Transaction amount over time'
           },
           xAxis: {
-              categories: createdAt
+              type: 'datetime',
+              dateTimeLabelFormats: {
+                  month: '%e. %b',
+                  year: '%b'
+              },
+              title: {
+                  text: 'Date'
+              }
           },
           yAxis: {
               title: {
@@ -42,7 +46,7 @@ const query = `{
           },
           series: [{
               name: 'Amount',
-              data: amounts
+              data: dataPoints
           }]
       });
     });
