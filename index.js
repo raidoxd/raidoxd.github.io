@@ -1,10 +1,9 @@
 const API_URL = 'https://01.kood.tech/api/graphql-engine/v1/graphql';
-const query = `query ($id: Int!, $offset: Int!){
+const query = `{
     user(where: { login: { _eq: "raidoxd" } }) {
       transactions(
-          where: {userId: {_eq: $id}, type: {_eq: "xp"}, object: {type: {_nregex: "exercise|raid"}}}
+          where: {type: {_eq: "xp"}, object: {type: {_nregex: "exercise|raid"}}}
           limit: 50
-          offset: $offset
           order_by: {createdAt: asc}
       ) {
         amount
