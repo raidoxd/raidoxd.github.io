@@ -24,7 +24,7 @@ const query = `{
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   
       var x = d3.scaleBand()
-          .rangeRound([0, width])
+          .rangeRound([0, 800])
           .padding(0.1)
           .domain(transactions.map(function(d) { return d.amount; }));
   
