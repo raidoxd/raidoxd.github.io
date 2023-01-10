@@ -21,13 +21,18 @@ const query = `{
     .then(response => response.json())
     .then(({ data }) => {
       const transactions = data.user[0].transactions;
-      const dataPoints = transactions.map(transaction => [new Date(transaction.createdAt), transaction.amount]);
+      let runningTotal = 0;
+      const dataPoints = transactions.reduce((acc, cur) => {
+          runningTotal += cur.amount;
+          acc.push([new Date(cur.createdAt).getTime(), runningTotal]);
+          return acc;
+      }, []);
       Highcharts.chart('chart', {
           chart: {
               type: 'line'
           },
           title: {
-              text: 'Transaction amount over time'
+              text: 'Running total amount over time'
           },
           xAxis: {
               type: 'datetime',
@@ -50,3 +55,4 @@ const query = `{
           }]
       });
     });
+  
