@@ -1,62 +1,49 @@
 const API_URL = 'https://01.kood.tech/api/graphql-engine/v1/graphql';
-const query = `{
+const query = `query ($id: Int!, $offset: Int!){
     user(where: { login: { _eq: "raidoxd" } }) {
-      login
-      transactions{
-          amount
+      transactions(
+          where: {userId: {_eq: $id}, type: {_eq: "xp"}, object: {type: {_nregex: "exercise|raid"}}}
+          limit: 50
+          offset: $offset
+          order_by: {createdAt: asc}
+      ) {
+        amount
+        createdAt
       }
     }
   }`;
+  const variables = {id: 1, offset: 0};
+  
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query, variables }),
   };
   
   fetch(API_URL, options)
     .then(response => response.json())
     .then(({ data }) => {
       const transactions = data.user[0].transactions;
-      var margin = {top: 20, right: 20, bottom: 30, left: 40},
-        width = 600 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
-      var svg = d3.select("#chart").append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  
-      var x = d3.scaleBand()
-          .rangeRound([0, width])
-          .padding(0.1)
-          .domain(transactions.map(function(d) { return d.amount; }));
-  
-      var y = d3.scaleLinear()
-          .rangeRound([height, 0])
-          .domain([0, d3.max(transactions, function(d) { return d.amount; })]);
-  
-      svg.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
-  
-      svg.append("g")
-          .attr("class", "y axis")
-          .call(d3.axisLeft(y).ticks(10))
-        .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", "0.71em")
-          .attr("text-anchor", "end")
-          .text("Amount");
-  
-      svg.selectAll(".bar")
-          .data(transactions)
-        .enter().append("rect")
-          .attr("class", "bar")
-          .attr("x", function(d) { return x(d.amount); })
-        .attr("y", function(d) { return y(d.amount); })
-        .attr("width", x.bandwidth())
-        .attr("height", function(d) { return height - y(d.amount); });
+      const amounts = transactions.map(transaction => transaction.amount);
+      const createdAt = transactions.map(transaction => transaction.createdAt);
+      Highcharts.chart('chart', {
+          chart: {
+              type: 'line'
+          },
+          title: {
+              text: 'Transaction amount over time'
+          },
+          xAxis: {
+              categories: createdAt
+          },
+          yAxis: {
+              title: {
+                  text: 'Amount'
+              }
+          },
+          series: [{
+              name: 'Amount',
+              data: amounts
+          }]
+      });
     });
-  
