@@ -7,7 +7,7 @@ const query = `{
 }`;
 
 const options = {
-  method: 'POST',
+  method: 'GET',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ query }),
 };
@@ -18,3 +18,6 @@ fetch(API_URL, options)
     console.log(data);
     // use the data here to create the chart
   });
+
+
+ 
