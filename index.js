@@ -17,24 +17,27 @@ const query = `{
     .then(response => response.json())
     .then(({ data }) => {
       const transactions = data.user[0].transactions;
+      var margin = {top: 20, right: 20, bottom: 30, left: 40},
+        width = 600 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
       var svg = d3.select("#chart").append("svg")
-          .attr("width", 800 + margin.left + margin.right)
-          .attr("height", 500 + margin.top + margin.bottom)
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
           .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   
       var x = d3.scaleBand()
-          .rangeRound([0, 800])
+          .rangeRound([0, width])
           .padding(0.1)
           .domain(transactions.map(function(d) { return d.amount; }));
   
       var y = d3.scaleLinear()
-          .rangeRound([500, 0])
+          .rangeRound([height, 0])
           .domain([0, d3.max(transactions, function(d) { return d.amount; })]);
   
       svg.append("g")
           .attr("class", "x axis")
-          .attr("transform", "translate(0," + 500 + ")")
+          .attr("transform", "translate(0," + height + ")")
           .call(d3.axisBottom(x));
   
       svg.append("g")
@@ -54,6 +57,6 @@ const query = `{
           .attr("x", function(d) { return x(d.amount); })
         .attr("y", function(d) { return y(d.amount); })
         .attr("width", x.bandwidth())
-        .attr("height", function(d) { return 500 - y(d.amount); });
+        .attr("height", function(d) { return height - y(d.amount); });
     });
   
