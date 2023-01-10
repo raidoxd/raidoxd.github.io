@@ -24,7 +24,9 @@ const query = `{
       let runningTotal = 0;
       const dataPoints = transactions.reduce((acc, cur) => {
           runningTotal += cur.amount;
-          acc.push([new Date(cur.createdAt).getTime(), runningTotal]);
+          const date = new Date(cur.createdAt);
+          const formattedDate = date.toLocaleDateString();
+          acc.push([formattedDate, runningTotal]);
           return acc;
       }, []);
       Highcharts.chart('chart', {
@@ -35,24 +37,19 @@ const query = `{
               text: 'Running total amount over time'
           },
           xAxis: {
-              type: 'datetime',
-              dateTimeLabelFormats: {
-                  month: '%e. %b',
-                  year: '%b'
-              },
+              type: 'category',
               title: {
                   text: 'Date'
               }
           },
           yAxis: {
-              title: {
-                  text: 'Amount'
-              }
-          },
-          series: [{
-              name: 'Amount',
-              data: dataPoints
-          }]
-      });
+            title: {
+                text: 'Amount'
+            }
+        },
+        series: [{
+            name: 'Amount',
+            data: dataPoints
+        }]
     });
-  
+  });
