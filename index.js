@@ -31,7 +31,8 @@ const query = `{
       }, []);
       Highcharts.chart('chart', {
           chart: {
-              type: 'line'
+              type: 'line',
+              backgroundColor: '#2b2b2b'
           },
           title: {
               text: 'Running total amount over time'
