@@ -8,7 +8,7 @@
     .xp svg{
         position: absolute;
         left: 50%;
-        top: 70%;
+        top: 80%;
         transform: translate(-50%, -50%);
         width: 640;
         height: 370;
@@ -33,7 +33,7 @@
       .identify{
         position: absolute;
         left: 50%;
-        top: 15%;
+        top: 10%;
         transform: translate(-50%, -50%);
         
      }
