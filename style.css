@@ -5,11 +5,13 @@
         border: 3px solid #e2740c;
         padding: 10px;
     }
-    .svg {
+    .xp svg{
         position: absolute;
         left: 50%;
-        top: 40%;
+        top: 70%;
         transform: translate(-50%, -50%);
+        width: 640;
+        height: 320;
         
      }
 
@@ -18,3 +20,12 @@
         stroke-opacity: 0.7;
         shape-rendering: crispEdges;
       }
+
+
+      .sv {
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translate(-50%, -50%);
+        
+     }
