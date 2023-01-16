@@ -1,5 +1,4 @@
 
-
 const xp = `
 query xp($login: String) {
   user(where:{login:{_eq:$login}}){
@@ -129,6 +128,14 @@ const firstTransaction = new Date(Math.min.apply(null, filteredTransactions.map(
       
         svg.append("g")
         .attr("transform", "translate(0,300)")
-        .call(d3.axisBottom(xScale).ticks(d3.timeMonth.every(2)));
+        .call(d3.axisBottom(xScale).ticks(d3.timeMonth.every(2)))
+        
+        svg.append("text")
+            .attr("x", (640 / 2))
+            .attr("y", 350)
+            .attr("text-anchor", "middle")
+            .style("font-size", "30px")
+            .text("XP over time");
+            
 
   })

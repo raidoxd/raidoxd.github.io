@@ -11,9 +11,18 @@
         top: 70%;
         transform: translate(-50%, -50%);
         width: 640;
-        height: 320;
+        height: 370;
         
      }
+     .level svg{
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, -50%);
+      width: 640;
+      height: 370;
+      
+   }
 
      .grid line {
         stroke: #ddd;
@@ -21,11 +30,14 @@
         shape-rendering: crispEdges;
       }
 
-
-      .sv {
+      .identify{
         position: absolute;
         left: 50%;
-        top: 20%;
+        top: 15%;
         transform: translate(-50%, -50%);
         
      }
+
+
+
+      
