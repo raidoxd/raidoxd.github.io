@@ -48,7 +48,7 @@ fetch(API_URL, options)
     filteredTransactions = filteredTransactions.filter(t => t.amount === highestAmounts[t.objectId]);
     
     
-console.log(filteredTransactions)
+
 ///////////////////////////////////////////////
 const firstTransaction = new Date(Math.min.apply(null, filteredTransactions.map(t => new Date(t.createdAt))));
     const lastTransaction = new Date(Math.max.apply(null, filteredTransactions.map(t => new Date(t.createdAt))));
@@ -77,7 +77,6 @@ const firstTransaction = new Date(Math.min.apply(null, filteredTransactions.map(
       lastMonthAmount = months[key];
   });
     console.log(months);
-
   /////////////////////////////
 
     // generate

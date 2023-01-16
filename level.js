@@ -35,7 +35,7 @@ fetch(API_URL, optionss)
 
         const filteredTransactions = Object.values(pathAmounts);
 
-        console.log(filteredTransactions)
+       
         /////////////////////////////
         const firstTransaction = new Date(Math.min.apply(null, filteredTransactions.map(t => new Date(t.createdAt))));
         const lastTransaction = new Date(Math.max.apply(null, filteredTransactions.map(t => new Date(t.createdAt))));
@@ -62,7 +62,7 @@ fetch(API_URL, optionss)
             lastMonthAmount = months[key];
         });
 
-        console.log(months);
+       
 
         /////////////////////////////
 
