@@ -22,7 +22,7 @@ const optionss = {
 fetch(API_URL, optionss)
     .then(response => response.json())
     .then(({ data }) => {
-        console.log(data)
+        
         /////////////////////////////  
 
         const pathAmounts = {};

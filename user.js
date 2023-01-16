@@ -25,7 +25,7 @@ fetch(API_URL, options)
 
     .then(response => response.json())
     .then(data => {
-        console.log(data,"asdas")
+       
         document.getElementById("id").innerHTML = data.data.user[0].id;
         document.getElementById("username").innerHTML = data.data.user[0].login;
         document.getElementById("level1").innerHTML= data.data.user[0].transactions[0].amount;

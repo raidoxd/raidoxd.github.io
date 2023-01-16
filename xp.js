@@ -35,7 +35,7 @@ const options = {
 fetch(API_URL, options)
   .then(response => response.json())
   .then(({ data }) => {
-    console.log(data)
+    
     const progresses = data.user[0].progresses.map(p => p.objectId);
     const transactions = data.user[0].transactions;
     let filteredTransactions = transactions.filter(t => progresses.includes(t.objectId));
@@ -76,7 +76,7 @@ const firstTransaction = new Date(Math.min.apply(null, filteredTransactions.map(
       }
       lastMonthAmount = months[key];
   });
-    console.log(months);
+    
   /////////////////////////////
 
     // generate
