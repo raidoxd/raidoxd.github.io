@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO MVC App</title>
+  <style>
+    .todo-item {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>TODO MVC App</h1>
+
+  <input type="text" id="todo-input" placeholder="Add a new todo item">
+  <footer id="footer">
+    <button id="view-all">All</button>
+    <button id="view-completed">Completed</button>
+    <button id="view-incomplete">Incomplete</button>
+    <h2 id="total-count"></h2>
+    <h2 id="completed-count"></h2>
+  </footer>
+  
+  <button id="delete-completed">Delete Completed</button>
+  <ul id="todo-list"></ul>
+  
+  <script src="framework/framework.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
